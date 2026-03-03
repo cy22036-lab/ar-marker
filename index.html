@@ -16,6 +16,7 @@
 <body>
 
 <a-scene
+  <a-asset-item id="m" src="model.glb"></a-asset-item>
   embedded
   vr-mode-ui="enabled: false"
   renderer="antialias: true;"
@@ -24,39 +25,32 @@
 
   <a-marker type="pattern" url="pattern-marker.patt">
 
-    <a-entity
-      position="0 0.05 0"
-      animation="property: position; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true; to: 0 0.15 0"
-    >
+  <a-entity
+    position="0 0.05 0"
+    animation="property: position; dir: alternate; dur: 1600; easing: easeInOutSine; loop: true; to: 0 0.15 0"
+  >
+    <a-gltf-model
+      src="#m"
+      position="0 0 0"
+      rotation="0 0 0"
+      scale="0.5 0.5 0.5"
+    ></a-gltf-model>
+  </a-entity>
 
-      <a-sphere
-        position="0 0.18 0"
-        radius="0.08"
-        color="#ff2d55">
-      </a-sphere>
+  <a-circle
+    position="0 0.01 0"
+    rotation="-90 0 0"
+    radius="0.18"
+    material="color: #000; transparent: true; opacity: 0.25"
+    animation="property: scale; dir: alternate; dur: 1600; easing: easeInOutSine; loop: true; to: 0.8 0.8 0.8"
+  ></a-circle>
 
-      <a-cone
-        position="0 0.08 0"
-        radius-bottom="0.05"
-        radius-top="0"
-        height="0.16"
-        color="#ff2d55">
-      </a-cone>
-
-    </a-entity>
-
-    <a-circle
-      position="0 0.01 0"
-      rotation="-90 0 0"
-      radius="0.12"
-      material="color: #000; transparent: true; opacity: 0.25">
-    </a-circle>
-
-  </a-marker>
+</a-marker>
 
   <a-entity camera></a-entity>
 
 </a-scene>
 
 </body>
+
 </html>
