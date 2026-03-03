@@ -1,48 +1,44 @@
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>AR.js Image Marker (iPhone)</title>
+<a-marker type="pattern" url="pattern-marker.patt">
 
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  <!-- 全体をまとめる親（上下に動かす） -->
+  <a-entity
+    position="0 0.05 0"
+    animation="property: position; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true; to: 0 0.15 0"
+  >
 
-    <style>
-      body { margin: 0; overflow: hidden; }
-    </style>
-  </head>
+    <!-- ピン上部（丸） -->
+    <a-sphere
+      position="0 0.18 0"
+      radius="0.08"
+      color="#ff2d55"
+    ></a-sphere>
 
-  <body>
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false"
-      renderer="antialias: true; colorManagement: true;"
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-    >
-      <!-- 画像を事前ロード -->
-      <a-assets>
-        <img id="overlay" src="overlay.png" crossorigin="anonymous" />
-      </a-assets>
+    <!-- ピン下部（先端） -->
+    <a-cone
+      position="0 0.08 0"
+      radius-bottom="0.05"
+      radius-top="0"
+      height="0.16"
+      color="#ff2d55"
+    ></a-cone>
 
-      <!-- ★あなたの patt を読む -->
-      <a-marker type="pattern" url="pattern-marker.patt">
-        <!-- マーカー上に「板」を置いて、その板に画像を貼る -->
-        <!-- width/height は表示したい比率に合わせて調整 -->
-        <a-plane
-          src="#overlay"
-          position="0 0 0"
-          rotation="-90 0 0"
-          width="1.2"
-          height="0.8"
-          material="transparent: true; opacity: 1"
-        ></a-plane>
+    <!-- くるっとゆっくり回転 -->
+    <a-animation
+      attribute="rotation"
+      to="0 360 0"
+      dur="6000"
+      repeat="indefinite"
+      easing="linear">
+    </a-animation>
 
-        <!-- ちょい浮かせたい場合は position の y を少し上げる -->
-        <!-- 例: position="0 0.01 0" -->
-      </a-marker>
+  </a-entity>
 
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
-</html>
+  <!-- 影（浮いてる感じが強くなる） -->
+  <a-circle
+    position="0 0.01 0"
+    rotation="-90 0 0"
+    radius="0.12"
+    material="color: #000; transparent: true; opacity: 0.25"
+  ></a-circle>
+
+</a-marker>
